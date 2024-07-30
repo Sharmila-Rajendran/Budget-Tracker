@@ -1,30 +1,24 @@
-document.getElementById('frm').addEventListener('submit', function (e) {
-    e.preventDefault();
+const ExpenseTrack = (event) => {
+    event.preventDefault();
 
-    const type = document.getElementById('val').value;
-    const name = document.getElementById('name').value;
-    const amount = document.getElementById('amt').value;
+    let Type = document.getElementById('val').value;
+    let Name = document.getElementById('name').value;
+    let Amount = document.getElementById('amt').value;
 
-    if (type && name && amount) {
-        addTransaction(type, name, amount);
-    } else {
-        alert('Please fill in all fields');
-    }
-});
+    const table = document.getElementsByTagName('tbody')[0];
 
-function addTransaction(type, name, amount) {
-    const table = document.getElementById('table').getElementsByTagName('tr')[0];
-    const newRow = table.insertRow();
+    let list = document.createElement('tr');
 
-    newRow.innerHTML = `
-        <td>${type}</td>
-        <td>${name}</td>
-        <td>$${amount}</td>
-        <td><button class="delete-btn" onclick="deleteTransaction(this)">Delete</button></td>
+    list.innerHTML = `
+        <td>${Type}</td>
+        <td>${Name}</td>
+        <td>${Amount}</td>
+        <td><button class="buttn">Delete</button></td>
     `;
-}
 
-function deleteTransaction(butt) {
-    const row = butt.parentNode.parentNode;
-    row.parentNode.removeChild(row);
-}
+    table.appendChild(list);
+
+    list.querySelector('.buttn').addEventListener('click', () => {
+        list.remove();
+    });
+};
